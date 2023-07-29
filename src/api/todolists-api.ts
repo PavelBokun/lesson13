@@ -82,7 +82,7 @@ export const todolistsAPI = {
     return promise;
   },
   crateTodolist(title: string) {
-    const promise = instanse.post<CreateTodolist>("todo-lists", {
+    const promise = instanse.post<ResponseType>("todo-lists", {
       title: title,
     });
     return promise;
@@ -92,7 +92,7 @@ export const todolistsAPI = {
     return promise;
   },
   updateTodolist(id: string, title: string) {
-    const promise = instanse.post<ResponseType>(`todo-lists/${id}`, {
+    const promise = instanse.post<ResponseType<TasksType>>(`todo-lists/${id}`, {
       title: title,
     });
     return promise;
@@ -104,9 +104,9 @@ export const todolistsAPI = {
     );
     return promise;
   },
-  createTasks(todolistId: string) {
+  createTasks(todolistId: string,taskTitle:string) {
     const promise = instanse.post<CreateTasksType>(
-      `todo-lists/${todolistId}/tasks`,{title:"hellowBaby"}
+      `todo-lists/${todolistId}/tasks`,{title:taskTitle}
     );
     return promise;
   },
@@ -119,7 +119,7 @@ export const todolistsAPI = {
   updateTasks(todolistId: string, taskId: string, model: UpdateTasksType) {
     const promise = instanse.put<UpdateTasksType>(
       `todo-lists/${todolistId}/tasks/${taskId}`,
-      { title: "hi" }
+      model
     );
     return promise;
   },
